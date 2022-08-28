@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Week4_TodoList-API/static/css/main.b8a71224.css",
+    "main.js": "/Week4_TodoList-API/static/js/main.60b20cc8.js",
+    "static/js/787.1e8098c1.chunk.js": "/Week4_TodoList-API/static/js/787.1e8098c1.chunk.js",
+    "index.html": "/Week4_TodoList-API/index.html",
+    "main.b8a71224.css.map": "/Week4_TodoList-API/static/css/main.b8a71224.css.map",
+    "main.60b20cc8.js.map": "/Week4_TodoList-API/static/js/main.60b20cc8.js.map",
+    "787.1e8098c1.chunk.js.map": "/Week4_TodoList-API/static/js/787.1e8098c1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b8a71224.css",
+    "static/js/main.60b20cc8.js"
+  ]
+}
