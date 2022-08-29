@@ -13,6 +13,7 @@ const TodoList = () =>{
   const { token, setToken } = useAuth();
   const { nickName } = useLocation().state;
   const navigate = useNavigate();
+  const [firstRender, setFirstRender] = useState(true);
   const [character, setCharacter] = useState('');
 
   // { id: 1660482483200, content: "睜開眼睛", completed_at: true },
@@ -30,13 +31,31 @@ const TodoList = () =>{
       .then((res) => {
         setTodo(res.data.todos);
         setLoading(false);
+        if(firstRender){
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1300,
+            timerProgressBar: true,
+            title: '登入成功',
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+          setFirstRender(false);
+        }
       })
       .catch((err) => {
         console.log(err.response);
-        Swal.fire({
-          icon: 'error',
-          title: '獲取資料失敗!',
-        });
+        if(!firstRender){
+          Swal.fire({
+            icon: 'error',
+            title: '獲取資料失敗!',
+          });
+        }
         setLoading(false);
         localStorage.clear();
         setToken(null);
@@ -45,35 +64,7 @@ const TodoList = () =>{
   }
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get('https://todoo.5xcamp.us/todos', {
-        headers: { Authorization: token },
-      })
-      .then((res) => {
-        setTodo(res.data.todos);
-        setLoading(false);
-        Swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: 'success',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          title: "登入成功",
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          },
-        });
-      })
-      .catch((err) => {
-        console.log(err.response);
-        setLoading(false);
-        localStorage.clear();
-        setToken(null);
-        navigate('/');
-      });
+    getTodo();
     // eslint-disable-next-line
   }, []);
 
@@ -203,7 +194,7 @@ const TodoList = () =>{
               inputAttributes: {
                 autocapitalize: 'off',
               },
-              customClass: 'swal2-wide',
+              customClass: 'swal-wide',
               showCancelButton: true,
               confirmButtonText: '修改待辦',
               showLoaderOnConfirm: true,
