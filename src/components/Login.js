@@ -41,7 +41,7 @@ const Login = () => {
         localStorage.setItem("localTodo", res.headers.authorization);
         localStorage.setItem('localUserData', JSON.stringify(res.data));
         navigate('todoList', {
-          replace: false,
+          replace: true,
           state: { nickName: res.data.nickname },
         });
         setLoading(false);

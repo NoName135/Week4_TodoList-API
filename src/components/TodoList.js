@@ -190,15 +190,19 @@ const TodoList = () =>{
             e.preventDefault();
             Swal.fire({
               title: '請輸入修改內容',
+              backdrop: true,
+              allowOutsideClick: false,
+              closeOnClickOutside: false,
               input: 'text',
               inputAttributes: {
                 autocapitalize: 'off',
               },
               customClass: 'swal-wide',
+
               showCancelButton: true,
               confirmButtonText: '修改待辦',
               showLoaderOnConfirm: true,
-              cancelButtonText: '取消',
+              // cancelButtonText: '取消',
               preConfirm: (content) => {
                 axios
                   .put(
@@ -218,7 +222,7 @@ const TodoList = () =>{
                     Swal.showValidationMessage('修改資料失敗');
                   });
               },
-              allowOutsideClick: () => !Swal.isLoading(),
+              // allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
               if (result.isConfirmed) {
                 console.log(result);
@@ -303,7 +307,9 @@ const TodoList = () =>{
             </a>
           </li>
           <li onClick={clearLocalStorage}>
-            <Link to="/">登出</Link>
+            <Link to="/" replace="true">
+              登出
+            </Link>
           </li>
         </ul>
       </nav>
