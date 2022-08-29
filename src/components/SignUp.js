@@ -14,6 +14,7 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const [Loading, setLoading] = useState(false);
+  const [passwordChk, setPasswordChk] = useState('');
 
   const onSubmit = (data) => {
     setLoading(true);
@@ -108,6 +109,7 @@ const SignUp = () => {
               name="password"
               id="password"
               placeholder="請輸入密碼"
+              onInput={() => setPasswordChk('')}
               {...register('password', {
                 required: { value: true, message: '此欄位必填' },
                 minLength: { value: 6, message: '密碼至少為6碼' },
@@ -123,10 +125,13 @@ const SignUp = () => {
               name="passwordCheck"
               id="passwordCheck"
               placeholder="請再次輸入密碼"
+              value={passwordChk}
+              onInput={(e) => setPasswordChk(e.target.value)}
               {...register('passwordCheck', {
                 required: { value: true, message: '此欄位必填' },
-                validate: (value) =>
-                  value === watch('password', '') || '密碼不一致',
+                validate: (value) => {
+                  return value === watch('password') || '密碼不一致';
+                },
               })}
             />
             <span>{errors.passwordCheck?.message}</span>

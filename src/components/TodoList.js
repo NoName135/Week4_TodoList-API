@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faPlus, faPencil } from '@fortawesome/free-solid-svg-icons';
 
 import { useAuth } from './Context';
 import RingLoading from './Loading';
@@ -33,6 +33,10 @@ const TodoList = () =>{
       })
       .catch((err) => {
         console.log(err.response);
+        Swal.fire({
+          icon: 'error',
+          title: '獲取資料失敗!',
+        });
         setLoading(false);
         localStorage.clear();
         setToken(null);
@@ -41,20 +45,35 @@ const TodoList = () =>{
   }
 
   useEffect(() => {
-    Swal.fire({
-      toast: true,
-      position: 'top-end',
-      icon: 'success',
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-      title: '登入成功',
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer);
-        toast.addEventListener('mouseleave', Swal.resumeTimer);
-      },
-    });
-    getTodo()
+    setLoading(true);
+    axios
+      .get('https://todoo.5xcamp.us/todos', {
+        headers: { Authorization: token },
+      })
+      .then((res) => {
+        setTodo(res.data.todos);
+        setLoading(false);
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          title: "登入成功",
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        setLoading(false);
+        localStorage.clear();
+        setToken(null);
+        navigate('/');
+      });
     // eslint-disable-next-line
   }, []);
 
@@ -173,6 +192,56 @@ const TodoList = () =>{
     const { id, content, completed_at } = props.item;
     return (
       <li>
+        <a
+          className="edit_todo"
+          href="#/todoList"
+          onClick={(e) => {
+            e.preventDefault();
+            Swal.fire({
+              title: '請輸入修改內容',
+              input: 'text',
+              inputAttributes: {
+                autocapitalize: 'off',
+              },
+              customClass: 'swal2-wide',
+              showCancelButton: true,
+              confirmButtonText: '修改待辦',
+              showLoaderOnConfirm: true,
+              cancelButtonText: '取消',
+              preConfirm: (content) => {
+                axios
+                  .put(
+                    `https://todoo.5xcamp.us/todos/${id}`,
+                    { todo: { content: content } },
+                    {
+                      headers: {
+                        Authorization: token,
+                      },
+                    }
+                  )
+                  .then((res) => {
+                    getTodo();
+                  })
+                  .catch((err) => {
+                    console.log(err.response);
+                    Swal.showValidationMessage('修改資料失敗');
+                  });
+              },
+              allowOutsideClick: () => !Swal.isLoading(),
+            }).then((result) => {
+              if (result.isConfirmed) {
+                console.log(result);
+                Swal.fire({
+                  icon: 'success',
+                  title: `修改資料成功`,
+                  text: `待辦更新：${result.value}`,
+                });
+              }
+            });
+          }}
+        >
+          <FontAwesomeIcon className="fa-2x" icon={faPencil} />
+        </a>
         <label className="todoList_label">
           <input
             className="todoList_input"
@@ -201,6 +270,7 @@ const TodoList = () =>{
           <span>{content}</span>
         </label>
         <a
+          className="delete_todo"
           href="#/todoList"
           onClick={(e) => {
             e.preventDefault();
@@ -222,7 +292,7 @@ const TodoList = () =>{
               });
           }}
         >
-          <FontAwesomeIcon className="fa-2x" icon={faTimes} />
+          <FontAwesomeIcon className="fa-2x" icon={faTrashCan} />
         </a>
       </li>
     );

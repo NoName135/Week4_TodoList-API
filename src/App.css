@@ -499,15 +499,30 @@ nav ul a span {
 }
 
 .todoList_list .todoList_items li a {
-  margin-left: 17px;
+  /* margin-left: 17px; */
+
+  
   display: block;
   font-size: 14px;
   color: #333333;
   opacity: 0;
 }
 
+@media (max-width: 576px) {
+  .todoList_list .todoList_items li a {
+    opacity: 1;
+  }
+}
+
 .todoList_list .todoList_items li:hover a {
   opacity: 1;
+}
+.todoList_list .todoList_items li .edit_todo{
+  margin-right: 24px;
+}
+
+.todoList_list .todoList_items li .delete_todo {
+    margin-left: 24px;
 }
 
 .todoList_list .todoList_statistics {
@@ -551,4 +566,7 @@ nav ul a span {
 .loading{
   width: 72px;
   height: 72px;
+}
+.swal2-wide {
+  max-width: 350px !important;
 }
