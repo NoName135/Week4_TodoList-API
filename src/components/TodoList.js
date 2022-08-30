@@ -192,7 +192,6 @@ const TodoList = () =>{
               title: '請輸入修改內容',
               backdrop: true,
               allowOutsideClick: false,
-              closeOnClickOutside: false,
               input: 'text',
               inputAttributes: {
                 autocapitalize: 'off',
@@ -225,7 +224,6 @@ const TodoList = () =>{
               // allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log(result);
                 Swal.fire({
                   icon: 'success',
                   title: `修改資料成功`,
