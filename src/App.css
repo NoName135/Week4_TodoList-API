@@ -198,7 +198,11 @@ nav ul a span {
     display: none;
   }
 }
-
+@media (max-width: 576px) {
+  .formControls_wrap{
+    overflow: auto;
+  }
+}
 .formControls {
   margin-left: 100px;
   display: -webkit-box;
@@ -213,6 +217,7 @@ nav ul a span {
 @media (max-width: 576px) {
   .formControls {
     margin-left: 0;
+    padding-bottom: 32px;
   }
 }
 
@@ -242,6 +247,11 @@ nav ul a span {
   width: 304px;
   padding: 12px 16px;
   margin: 4px 0;
+}
+@media (max-width: 576px) {
+  .formControls .formControls_input {
+    max-width: auto;
+  }
 }
 
 .formControls .formControls_input:focus {
@@ -347,8 +357,9 @@ nav ul a span {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    margin: 48px auto 0 auto;
-    padding: 48px 31px;
+            justify-content: start;
+    margin: 0 auto;
+    padding: 32px;
   }
 }
 

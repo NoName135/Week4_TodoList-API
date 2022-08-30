@@ -75,7 +75,7 @@ const Login = () => {
             alt="workImg"
           />
         </div>
-        <div>
+        <div className="formControls_wrap">
           <form className="formControls" onSubmit={handleSubmit(onSubmit)}>
             <h2 className="formControls_txt">最實用的線上待辦事項服務</h2>
             <label className="formControls_label" htmlFor="account">
