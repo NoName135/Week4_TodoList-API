@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan, faPlus, faPencil } from '@fortawesome/free-solid-svg-icons';
+import {  faPlus, faXmark, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 import { useAuth } from './Context';
 import RingLoading from './Loading';
@@ -119,6 +119,7 @@ const TodoList = () =>{
 
   const clearComplete = (e) => {
     e.preventDefault();
+    if (todo.filter((item, i) => item.completed_at).length){
       Swal.fire({
         title: '確定要刪除已完成待辦?',
         icon: 'warning',
@@ -152,6 +153,21 @@ const TodoList = () =>{
           });
         }
       });
+    }else{
+      Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'info',
+        showConfirmButton: false,
+        timer: 1700,
+        timerProgressBar: true,
+        title: '沒有任何已完成待辦',
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+    }
   };
 
   function TitleState(props) {
@@ -233,7 +249,7 @@ const TodoList = () =>{
             });
           }}
         >
-          <FontAwesomeIcon className="fa-2x" icon={faPencil} />
+          <FontAwesomeIcon className="fa-2x" icon={faPenToSquare} />
         </a>
         <label className="todoList_label">
           <input
@@ -285,7 +301,7 @@ const TodoList = () =>{
               });
           }}
         >
-          <FontAwesomeIcon className="fa-2x" icon={faTrashCan} />
+          <FontAwesomeIcon className="fa-2x" icon={faXmark} />
         </a>
       </li>
     );

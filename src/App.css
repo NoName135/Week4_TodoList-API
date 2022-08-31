@@ -554,6 +554,10 @@ nav ul a span {
   text-decoration: none;
 }
 
+.todoList_list .todoList_statistics a:hover {
+  color: #fc1313;
+}
+
 .todo-none {
   display: flex;
   justify-content: center;

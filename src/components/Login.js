@@ -38,7 +38,7 @@ const Login = () => {
       .post('https://todoo.5xcamp.us/users/sign_in', userData)
       .then((res) => {
         setToken(res.headers.authorization);
-        localStorage.setItem("localTodo", res.headers.authorization);
+        localStorage.setItem('localTodo', res.headers.authorization);
         localStorage.setItem('localUserData', JSON.stringify(res.data));
         navigate('todoList', {
           replace: true,
@@ -47,11 +47,11 @@ const Login = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
         Swal.fire({
           icon: 'error',
           title: err.response.data.message,
-          html: '<pre>帳號或密碼錯誤 !\n請重新輸入</pre>',
+          html: `<pre>帳號或密碼錯誤 !\n請重新輸入</pre>`,
         });
         setLoading(false);
       });
