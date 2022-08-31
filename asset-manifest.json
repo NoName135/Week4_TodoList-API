@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Week4_TodoList-API/static/css/main.65c01970.css",
-    "main.js": "/Week4_TodoList-API/static/js/main.02ddff4f.js",
+    "main.css": "/Week4_TodoList-API/static/css/main.b150d41d.css",
+    "main.js": "/Week4_TodoList-API/static/js/main.c576da1a.js",
     "static/js/787.1e8098c1.chunk.js": "/Week4_TodoList-API/static/js/787.1e8098c1.chunk.js",
     "index.html": "/Week4_TodoList-API/index.html",
-    "main.65c01970.css.map": "/Week4_TodoList-API/static/css/main.65c01970.css.map",
-    "main.02ddff4f.js.map": "/Week4_TodoList-API/static/js/main.02ddff4f.js.map",
+    "main.b150d41d.css.map": "/Week4_TodoList-API/static/css/main.b150d41d.css.map",
+    "main.c576da1a.js.map": "/Week4_TodoList-API/static/js/main.c576da1a.js.map",
     "787.1e8098c1.chunk.js.map": "/Week4_TodoList-API/static/js/787.1e8098c1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.65c01970.css",
-    "static/js/main.02ddff4f.js"
+    "static/css/main.b150d41d.css",
+    "static/js/main.c576da1a.js"
   ]
 }
