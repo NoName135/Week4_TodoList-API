@@ -35,7 +35,9 @@ const Login = () => {
     // console.log({...data})
     const userData = { user: { ...data } };
     axios
-      .post('https://todoo.5xcamp.us/users/sign_in', userData)
+      .post('https://todoo.5xcamp.us/users/sign_in', userData, {
+        headers:  {"Content-Type": "application/json" ,"accept": "application/json"}
+      })
       .then((res) => {
         setToken(res.headers.authorization);
         localStorage.setItem('localTodo', res.headers.authorization);
@@ -47,11 +49,11 @@ const Login = () => {
         setLoading(false);
       })
       .catch((err) => {
-        // console.log(err.response);
+        // console.log(err);
         Swal.fire({
           icon: 'error',
-          title: err.response.data.message,
-          html: `<pre>帳號或密碼錯誤 !\n請重新輸入</pre>`,
+          title: '登入失敗',
+          html: `<pre>${err.response.data.error}\n請重新輸入</pre>`,
         });
         setLoading(false);
       });

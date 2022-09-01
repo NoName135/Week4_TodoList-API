@@ -26,7 +26,7 @@ const TodoList = () =>{
     setLoading(true);
     axios
       .get('https://todoo.5xcamp.us/todos', {
-        headers: { Authorization: token },
+        headers: { "Content-Type": "application/json", Authorization: token },
       })
       .then((res) => {
         setTodo(res.data.todos);
@@ -98,6 +98,7 @@ const TodoList = () =>{
           { todo: { content: character } },
           {
             headers: {
+              "Content-Type": "application/json",
               Authorization: token,
             },
           }
@@ -135,7 +136,7 @@ const TodoList = () =>{
               setLoading(true);
               axios
                 .delete(`https://todoo.5xcamp.us/todos/${data.id}`, {
-                  headers: { Authorization: token },
+                  headers: { "Content-Type": "application/json", Authorization: token },
                 })
                 .then((res) => {
                   setChangeTodo(true);
@@ -225,7 +226,7 @@ const TodoList = () =>{
                     { todo: { content: content } },
                     {
                       headers: {
-                        Authorization: token,
+                        "Content-Type": "application/json", Authorization: token,
                       },
                     }
                   )
@@ -261,7 +262,7 @@ const TodoList = () =>{
               setLoading(true);
               axios
                 .patch(`https://todoo.5xcamp.us/todos/${id}/toggle`, id, {
-                  headers: { Authorization: token },
+                  headers: { "Content-Type": "application/json", Authorization: token },
                 })
                 .then((res) => {
                   setChangeTodo(true);
@@ -286,7 +287,7 @@ const TodoList = () =>{
             setLoading(true);
             axios
               .delete(`https://todoo.5xcamp.us/todos/${id}`, {
-                headers: { Authorization: token },
+                headers: { "Content-Type": "application/json", Authorization: token },
               })
               .then((res) => {
                 setChangeTodo(true);
